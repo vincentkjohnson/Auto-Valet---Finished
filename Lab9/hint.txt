@@ -1,0 +1,26 @@
+Utility function to add to uart.c
+
+/**
+ * @brief sends an entire string of characters over UART1 module
+ * @param data pointer to the first index of the string to be sent
+ */
+void uart_sendStr(const char *data)
+{
+    //until we reach a null character
+    while (*data != '\0')
+    {
+        //send the current character
+        uart_sendChar(*data);
+        // increment the pointer.
+        data++;
+    }
+
+}
+
+
+Sample use of sendStr in main() function
+
+    // prepare the header
+    sprintf(sendstr, "%-20s%-20s%-20s\r\n", "Degrees", "IR Distance (cm)", "Sonar Distance(cm)");
+    // send the header
+    uart_sendStr(sendstr);
