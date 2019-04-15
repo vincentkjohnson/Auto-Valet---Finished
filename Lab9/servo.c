@@ -68,7 +68,7 @@ void servo_init(void) {
  */
 void servo_move(double degrees) {
 	//TIMER1_TBMATCHR_R = 320000 - (16000 + (16000 * (degrees / 180)));
-    TIMER1_TBMATCHR_R = (312000 - ((1400 * degrees) / 9)) + calibration;
+    TIMER1_TBMATCHR_R = (310500 - ((1400 * degrees) / 9)) + calibration;
 }
 
 /**
