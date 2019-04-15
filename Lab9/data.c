@@ -8,10 +8,16 @@
  *
  */
 
-double object_Distance(float *data[][]) {
+void scan() {
 
     double ir_boundary = 80.0; //cm
     double sonar_boundary = 185.0; //cm
+	
+	int start_angle = 0;
+	int end_angle = 0;
+	
+	prev_ir = 0;
+	prev_sonar[180] = 0;
 
     //Find objects using sonar, then compare with IR
 
@@ -20,18 +26,46 @@ double object_Distance(float *data[][]) {
     //Then find the radial size of the object
 
     //Then the linear width of the object, formula
-
-    int i = 0;
-    double objectsFound = 0.0;
-
-
-    for (; i <= 180; i++) {
-        if ((*(*data+i) + 1) < 185.0 && (*(*data+i)+0) < 80.0) {
-            objectsFound++;
-        }
-    }
-
-    return objectsFound;
+	
+	servo_move(0);
+	timer_wailMillis(500);
+	
+	
+	//scan
+	int i = 0;
+	for (i = 0; i < 180; i++) {
+		double cur_ir = adc_conversion(adc_read(), calibration);
+		double cur_sonar = ping_getDistance() * .0010625;
+		
+		//Object Start
+		if(prev_ir == ir_boundary && cur_ir < ir_boundary) {
+			start_angle = i;
+		}
+		
+		//Object End
+		if ((prev_ir < ir_boundary && cur_ir == ir_boundary) (cur_ir < ir_boundary && i >= 179)) {
+			{
+				end_angle = i;
+				
+				double arc_width = abs(end_angle - start_angle);
+				double object_angle = start_angle + (arc_width / 2);
+				double object_distance = prev_sonar[object_angle] - 1;
+				double object_width = ;
+				
+				
+				//Ignore small objects less than 2.0 cm
+				if (object_distance < ir_boundary && object_width > 2.0) {
+					
+				}
+			}
+		}
+		
+		prev_sonar[i] = cur_sonar;
+		prev_ir = cur_ir;
+		
+		servo_move(i);
+		timer_wailMillis(1);
+	}
 
 
 }
