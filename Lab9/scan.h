@@ -1,0 +1,18 @@
+#include <stdint.h>
+#include <stdbool.h>
+#include "driverlib/interrupt.h"
+#include <inc/tm4c123gh6pm.h>
+
+/*
+ *
+ * Authors: Vincent Johnson & Joshua French
+ *
+ */
+
+/**
+ * method scans a 180 degree arc in front of the robot,
+ * and prints out any objects width and angle of location onto putty.
+ *
+ * Then finds the smallest object and prints the  angle and width to LCD.
+ */
+void scan_area();
