@@ -1,0 +1,24 @@
+Tasks for Final Project:
+
+1) Driving Bot (Autonomously)
+- Calibration of Sensors
+- Bumping Sensors
+	- Low Objects
+- Cliff Sensors
+	- White Line
+	- Hole in the course
+	- End Area?
+2) Scanning Area
+- Ping Sensor
+	- Obstacle Distance
+- IR Sensor
+	- Location of Obstacles
+3) GUI
+- UART
+- Wifi to Putty
+
+
+Flowchart:
+Start in Area -> Scan 180 degree arc -> Locate objects
+-> If objects are to far, move forward in increments -> Scan 180 degree arc
+-> Locate Objects 
