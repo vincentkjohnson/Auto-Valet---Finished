@@ -18,6 +18,7 @@ ORDERED_OBJS += \
 "./movement.obj" \
 "./open_interface.obj" \
 "./ping.obj" \
+"./scan.obj" \
 "./servo.obj" \
 "./timer.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
@@ -167,8 +168,8 @@ Lab9.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "adc.obj" "button.obj" "data.obj" "l1_main.obj" "lcd.obj" "movement.obj" "open_interface.obj" "ping.obj" "servo.obj" "timer.obj" "tm4c123gh6pm_startup_ccs.obj" "uart.obj" 
-	-$(RM) "adc.d" "button.d" "data.d" "l1_main.d" "lcd.d" "movement.d" "open_interface.d" "ping.d" "servo.d" "timer.d" "tm4c123gh6pm_startup_ccs.d" "uart.d" 
+	-$(RM) "adc.obj" "button.obj" "data.obj" "l1_main.obj" "lcd.obj" "movement.obj" "open_interface.obj" "ping.obj" "scan.obj" "servo.obj" "timer.obj" "tm4c123gh6pm_startup_ccs.obj" "uart.obj" 
+	-$(RM) "adc.d" "button.d" "data.d" "l1_main.d" "lcd.d" "movement.d" "open_interface.d" "ping.d" "scan.d" "servo.d" "timer.d" "tm4c123gh6pm_startup_ccs.d" "uart.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
