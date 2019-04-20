@@ -13,14 +13,19 @@
 
 void move_foward(oi_t *sensor_data, int millimeters) {
     int sum = 0;
+    short boundary = 2700;
+    short hole = 1500;
 
     //Right | Left 270, 258
-    oi_setWheels(250,250);
-    while (sum < millimeters) {
-        oi_update(sensor_data);
-        sum += sensor_data -> distance;
+     while (sum < millimeters ) {
+         oi_update(sensor_data);
+         if (sensor_data -> bumpLeft == 1 || sensor_data -> cliffFrontLeftSignal >= boundary || sensor_data -> cliffFrontLeftSignal <= hole && sensor_data -> bumpRight == 1 || sensor_data -> cliffFrontRightSignal >= boundary || sensor_data -> cliffFrontRightSignal <= hole) {
+             oi_setWheels(250,250);
+         }
+         sum += sensor_data -> distance;
 
-        lcd_printf("Distance: %d", sum);
+         lcd_printf("Distance: %d", sum);
+
     }
 
     oi_setWheels(0,0);
@@ -73,11 +78,14 @@ void moving_in_square(oi_t *sensor_data) {
     }
 }
 
-void collision_detection(oi_t *sensor_data) {
+void collision_detection(oi_t *sensor_data, int distance) {
     int sum = 0;
-    while (sum < 2000) {
+    short boundary = 2700;
+    short hole = 1500;
+
+    while (sum < distance) {
         oi_update(sensor_data);
-        if (sensor_data -> bumpLeft == 1) {
+        if (sensor_data -> bumpLeft == 1 || sensor_data -> cliffFrontLeftSignal >= boundary || sensor_data -> cliffFrontLeftSignal <= hole ) {
             oi_setWheels(0, 0);
             sum -= move_backward(sensor_data, 150);
             //sum += sensor_data -> distance;
@@ -86,7 +94,7 @@ void collision_detection(oi_t *sensor_data) {
             turn_left(sensor_data, 90.0);
 //            sum -= 150;
         }
-        if (sensor_data -> bumpRight == 1) {
+        if (sensor_data -> bumpRight == 1 || sensor_data -> cliffFrontRightSignal >= boundary || sensor_data -> cliffFrontRightSignal <= hole) {
             oi_setWheels(0, 0);
             sum -= move_backward(sensor_data, 150);
             //sum += sensor_data -> distance;

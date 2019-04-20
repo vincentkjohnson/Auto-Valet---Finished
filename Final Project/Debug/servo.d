@@ -20,7 +20,6 @@ servo.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/include/stdarg.h
 servo.obj: C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/include/string.h
 servo.obj: ../timer.h
 servo.obj: ../button.h
-servo.obj: C:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h
 
 ../servo.c: 
 ../servo.h: 
@@ -42,4 +41,3 @@ C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/include/stdarg.h:
 C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/include/string.h: 
 ../timer.h: 
 ../button.h: 
-C:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h: 

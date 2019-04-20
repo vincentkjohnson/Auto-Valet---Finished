@@ -25,11 +25,11 @@ double object_Distance(float *data[][]) {
     double objectsFound = 0.0;
 
 
-    for (; i <= 180; i++) {
-        if ((*(*data+i) + 1) < 185.0 && (*(*data+i)+0) < 80.0) {
-            objectsFound++;
-        }
-    }
+//    for (; i <= 180; i++) {
+//        if ((*(*data+i) + 1) < 185.0 && (*(*data+i)+0) < 80.0) {
+//            objectsFound++;
+//        }
+//    }
 
     return objectsFound;
 
