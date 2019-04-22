@@ -8,7 +8,8 @@
 #ifndef MOVEMENT_H_
 #define MOVEMENT_H_
 
-void move_foward(oi_t *sensor, int centimeters);
+void move_init(int *event1);
+void move_forward(oi_t *sensor, int millimeters);
 int move_backward(oi_t *sensor_data, int millimeters);
 void turn_right(oi_t *sensor_data, double degrees);
 void turn_left(oi_t *sensor_data, double degrees);
