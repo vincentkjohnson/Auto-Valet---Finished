@@ -14,8 +14,13 @@
  *
  */
 
-volatile int i;
 volatile double objects[20][20]; //[Width][Angle]
+volatile int *events;
+
+void scan_init(int *event1)
+{
+    events = event1;
+}
 
 /**
  * method scans a 180 degree arc in front of the robot,

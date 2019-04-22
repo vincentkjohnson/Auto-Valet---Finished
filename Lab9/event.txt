@@ -1,0 +1,10 @@
+0 = no event, operating as normal
+1 = bump right
+2 = bump left
+3 = right border
+4 = left border
+5 = right cliff
+6 = left cliff
+7 = 
+8 = 
+9 = 

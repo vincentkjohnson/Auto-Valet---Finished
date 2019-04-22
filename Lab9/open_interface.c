@@ -159,6 +159,7 @@ void oi_init(oi_t *self)
 	oi_update(self);
 	oi_update(self); //Call twice to clear distance/angle
 
+
 }
 
 void oi_close() {

@@ -35,6 +35,7 @@ l1_main.obj: ../button.h
 l1_main.obj: C:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h
 l1_main.obj: ../scan.h
 l1_main.obj: C:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h
+l1_main.obj: ../movement.h
 
 ../l1_main.c: 
 ../lcd.h: 
@@ -71,3 +72,4 @@ C:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h:
 C:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h: 
 ../scan.h: 
 C:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h: 
+../movement.h: 
