@@ -49,7 +49,7 @@ void main(void)
         {
             lcd_printf("right bump");
             move_backward(sensor_data , 50);
-            turn_left(sensor_data , 16);
+            turn_left(sensor_data , 47);
             event = 0;
 //            move_forward(sensor_data , 250);
         }
@@ -58,7 +58,7 @@ void main(void)
         {
             lcd_printf("left bump");
             move_backward(sensor_data , 50);
-            turn_right(sensor_data , 14);
+            turn_right(sensor_data , 43);
             event = 0;
 //            move_forward(sensor_data , 250);
         }
@@ -67,7 +67,7 @@ void main(void)
         {
             lcd_printf("right border");
             move_backward(sensor_data , 50);
-            turn_left(sensor_data , 15);
+            turn_left(sensor_data , 17);
             event = 0;
 //            move_forward(sensor_data , 250);
         }
@@ -76,7 +76,7 @@ void main(void)
         {
             lcd_printf("left border");
             move_backward(sensor_data , 50);
-            turn_right(sensor_data , 15);
+            turn_right(sensor_data , 23);
             event = 0;
 //            move_forward(sensor_data , 250);
         }
@@ -105,14 +105,20 @@ void main(void)
             event = 0;
             move_forward(sensor_data , 250);
         }
-        //obstructions in the path, turn and scan again
+        //obstructions in the path on the left side, turn right and scan again
         if (event == 8)
         {
             lcd_printf("not clear");
             event = 0;
             turn_right(sensor_data , 30);
         }
-
+        //obstructions in the path on the right side, turn left and scan again
+        if (event == 9)
+        {
+            lcd_printf("not clear");
+            event = 0;
+            turn_left(sensor_data , 30);
+        }
 
     }
     oi_free(sensor_data);

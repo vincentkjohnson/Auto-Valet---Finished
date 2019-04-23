@@ -71,11 +71,11 @@ void scan_area() {
                     num_objects++;
 
                     int j;
-                    start_angle -= 9;
+                    start_angle -= 6;
                     if (start_angle < 0) {
                         start_angle = 0;
                     }
-                    end_angle -= 16;
+                    end_angle -= 13;
                     avg_distance = 0;
                     for (j = start_angle; j <= end_angle; j++) {
                         avg_distance += distance[j];
@@ -129,6 +129,10 @@ void scan_area() {
         //if it cannot move directly forward
         if (move_forward == 1)
         {
+            //figure out which way it needs to turn
+
+
+
             *events = 8;
         }
         //if it can move directly forward
