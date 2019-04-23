@@ -5,6 +5,8 @@
 4 = left border
 5 = right cliff
 6 = left cliff
-7 = 
-8 = 
+7 = keep moving forward, no objects
+8 = object in the moving path, it cannot move directly forward
 9 = 
+10 = 
+11 = 

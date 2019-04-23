@@ -15,7 +15,7 @@
 
 /**
  * main.c
- *Author: Vincent Johnson && Joshua French
+ *Author: Vincent Johnson && Joshua French && Xinlei Yu
  *
  * @date 04-1-19
  */
@@ -35,15 +35,14 @@ void main(void)
     oi_init(sensor_data);
     move_init(&event);
     scan_init(&event);
+//    putty_display();
 
     while (1)
     {
         if (event == 0)
         {
             lcd_printf("scanning");
-            timer_waitMillis(100);
-            move_forward(sensor_data , 250);
-
+            scan_area();
         }
         //bump right
         if (event == 1)
@@ -52,7 +51,7 @@ void main(void)
             move_backward(sensor_data , 50);
             turn_left(sensor_data , 16);
             event = 0;
-            move_forward(sensor_data , 250);
+//            move_forward(sensor_data , 250);
         }
         //bump left
         if (event == 2)
@@ -61,7 +60,7 @@ void main(void)
             move_backward(sensor_data , 50);
             turn_right(sensor_data , 14);
             event = 0;
-            move_forward(sensor_data , 250);
+//            move_forward(sensor_data , 250);
         }
         //right border
         if (event == 3)
@@ -70,7 +69,7 @@ void main(void)
             move_backward(sensor_data , 50);
             turn_left(sensor_data , 15);
             event = 0;
-            move_forward(sensor_data , 250);
+//            move_forward(sensor_data , 250);
         }
         //left border
         if (event == 4)
@@ -79,7 +78,7 @@ void main(void)
             move_backward(sensor_data , 50);
             turn_right(sensor_data , 15);
             event = 0;
-            move_forward(sensor_data , 250);
+//            move_forward(sensor_data , 250);
         }
         //right cliff
         if (event == 5)
@@ -88,7 +87,7 @@ void main(void)
             move_backward(sensor_data , 50);
             turn_left(sensor_data , 15);
             event = 0;
-            move_forward(sensor_data , 250);
+//            move_forward(sensor_data , 250);
         }
         //left cliff
         if (event == 6)
@@ -97,10 +96,22 @@ void main(void)
             move_backward(sensor_data , 50);
             turn_right(sensor_data , 15);
             event = 0;
+//            move_forward(sensor_data , 250);
+        }
+        //the path is clear, can keep moving forward
+        if (event == 7)
+        {
+            lcd_printf("all clear");
+            event = 0;
             move_forward(sensor_data , 250);
         }
-
-
+        //obstructions in the path, turn and scan again
+        if (event == 8)
+        {
+            lcd_printf("not clear");
+            event = 0;
+            turn_right(sensor_data , 30);
+        }
 
 
     }
