@@ -20,6 +20,8 @@ void move_foward(oi_t *sensor_data, int millimeters) {
      while (sum < millimeters ) {
          oi_update(sensor_data);
          if (sensor_data -> bumpLeft == 1 || sensor_data -> cliffFrontLeftSignal >= boundary || sensor_data -> cliffFrontLeftSignal <= hole && sensor_data -> bumpRight == 1 || sensor_data -> cliffFrontRightSignal >= boundary || sensor_data -> cliffFrontRightSignal <= hole) {
+             oi_setWheels(0,0);
+         } else {
              oi_setWheels(250,250);
          }
          sum += sensor_data -> distance;
