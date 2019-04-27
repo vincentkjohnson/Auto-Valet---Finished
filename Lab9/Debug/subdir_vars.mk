@@ -15,6 +15,8 @@ C_SRCS += \
 ../adc.c \
 ../button.c \
 ../data.c \
+../goal.c \
+../goal_routine.c \
 ../l1_main.c \
 ../lcd.c \
 ../movement.c \
@@ -30,6 +32,8 @@ C_DEPS += \
 ./adc.d \
 ./button.d \
 ./data.d \
+./goal.d \
+./goal_routine.d \
 ./l1_main.d \
 ./lcd.d \
 ./movement.d \
@@ -45,6 +49,8 @@ OBJS += \
 ./adc.obj \
 ./button.obj \
 ./data.obj \
+./goal.obj \
+./goal_routine.obj \
 ./l1_main.obj \
 ./lcd.obj \
 ./movement.obj \
@@ -60,6 +66,8 @@ OBJS__QUOTED += \
 "adc.obj" \
 "button.obj" \
 "data.obj" \
+"goal.obj" \
+"goal_routine.obj" \
 "l1_main.obj" \
 "lcd.obj" \
 "movement.obj" \
@@ -75,6 +83,8 @@ C_DEPS__QUOTED += \
 "adc.d" \
 "button.d" \
 "data.d" \
+"goal.d" \
+"goal_routine.d" \
 "l1_main.d" \
 "lcd.d" \
 "movement.d" \
@@ -90,6 +100,8 @@ C_SRCS__QUOTED += \
 "../adc.c" \
 "../button.c" \
 "../data.c" \
+"../goal.c" \
+"../goal_routine.c" \
 "../l1_main.c" \
 "../lcd.c" \
 "../movement.c" \

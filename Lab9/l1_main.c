@@ -19,6 +19,8 @@
  *
  * @date 04-1-19
  */
+static int fast = 5;
+static int slow = 1;
 volatile int event = 0;
 volatile char s_data[21];
 volatile int i = 0;
@@ -37,12 +39,13 @@ void main(void)
     scan_init(&event);
 //    putty_display();
 
+
     while (1)
     {
         if (event == 0)
         {
             lcd_printf("scanning");
-            scan_area();
+            scan_area(fast);
         }
         //bump right
         if (event == 1)
