@@ -50,12 +50,12 @@ void move_forward(oi_t *sensor_data, int millimeters) {
             *events = 4;
             break;
         }
-        if (fr <= 1200 || r <= 1200)
+        if (fr <= 900 || r <= 900)
         {
             *events = 5;
             break;
         }
-        if (fl <= 1200 || l <= 1200)
+        if (fl <= 900 || l <= 900)
         {
             *events = 6;
             break;
