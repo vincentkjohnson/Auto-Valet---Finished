@@ -13,8 +13,10 @@
  */
 double objects[20][3];
 
-void goal_routine(int object_event, int object_Number_One, int object_Number_Two, double angle_One, double angle_Two, double distance_One, double distance_Two) {
-    int event = object_event;
+void goal_routine(int event, int object_event, int object_Number_One, int object_Number_Two, double angle_One, double angle_Two, double distance_One, double distance_Two) {
+    int done = 0;
+    int moveEvent = event;
+    int objEvent = object_event;
     int objOne = object_Number_One;
     int objTwo = object_Number_Two;
     double angleOne = angle_One;
@@ -22,9 +24,21 @@ void goal_routine(int object_event, int object_Number_One, int object_Number_Two
     double distOne = distance_One;
     double distTwo = distance_Two;
 
+    /* CAN'T SEE FAR OBJECT
+     *  X    -60cm-    X
+     *
+     * [ ]
+     */
+
+
+    /* CAN'T SEE FAR OBJECT
+     * X    -60cm-    X
+     *
+     *               [ ]
+     */
 
     //1 small object with 5.5 cm
-    if (event == 400) {
+    if (event == 400 && done == 0) {
         if (angleOne < 90) {
             turn_left(sensor_data, angleOne);
         } else if (angle > 90) {
@@ -34,29 +48,54 @@ void goal_routine(int object_event, int object_Number_One, int object_Number_Two
         //Line bot 20cm from small object
         if (distanceOne >= 20) {
             double distance = distOne - 20;
-            move_foward(sensor_data, distOne - distance);
+            move_foward(sensor_data, (distOne - distance) * 100);
         } else {
             double distnace = 20 - distOne;
-            move_backward(sensor_data, distOne + distance);
+            move_backward(sensor_data, (distOne + distance) * 100);
         }
     }
 
     //2 small object with 5.5 cm but objects in between
-    if (event == 401) {
-        double h;
+    if (event == 401 && done = 0) {
 
-        if (angleOne > 90 && angleOne > angleTwo) {
-            h = Math.sin(angleOne) * distOne;
-        } else if (angleTwo > 90 && angleTwo > angleOne) {
-            h = Math.sin(angleTwo) * distTwo;
-        } else {
-            h = Math.sin(angleTwo) * distTwo;
+        /*      00000
+         * X    -60cm-    X
+         *
+         *       [ ]
+         */
+
+        double angle = 90 - angleOne;
+        double distance = distOne / Math.sin(angle);
+        turn_left(sensor_data, 90 + angleOne);
+        move_forward(sensor_data, (distance + 60) * 100);
+        if (event == 7) {
+            turn_right(sensor_data, 90 + angleOne);
+            quick_Scan();
         }
+        turn_right(sensor_data, 90 + angleOne);
+        quick_Scan();
+        move_foward(sensor_data, 60);
+
+
     }
 
     //2 small objects nothing in between
-    if (event == 402) {
-        //Law of Cosines
+    if (event == 402 && done = 0) {
 
+        /*
+         * X    -60cm-    X
+         *
+         *       [ ]
+         */
+
+        if ((40 < angleOne < 90) && (130 > angleTwo > 90)) {
+            double distance = distTwo / Math.cos(angleTwo);
+            move_forward(sensors_data, (distance + 30) * 100);
+        }
+        done = 1
+    }
+
+    if (done = 1) {
+        scan_Goal();
     }
 }
