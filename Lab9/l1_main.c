@@ -20,17 +20,17 @@
  */
 
 //Main Functions to be used:
-void event_0(oi_t *sensor_data);
-void event_1(oi_t *sensor_data);
-void event_2(oi_t *sensor_data);
-void event_3(oi_t *sensor_data);
-void event_4(oi_t *sensor_data);
-void event_5(oi_t *sensor_data);
-void event_6(oi_t *sensor_data);
-void event_7(oi_t *sensor_data);
-void event_8(oi_t *sensor_data);
-void event_9(oi_t *sensor_data);
-void event_CHECK_GOAL(oi_t *sensor_data);
+//void event_0(oi_t *sensor_data);
+//void event_1(oi_t *sensor_data);
+//void event_2(oi_t *sensor_data);
+//void event_3(oi_t *sensor_data);
+//void event_4(oi_t *sensor_data);
+//void event_5(oi_t *sensor_data);
+//void event_6(oi_t *sensor_data);
+//void event_7(oi_t *sensor_data);
+//void event_8(oi_t *sensor_data);
+//void event_9(oi_t *sensor_data);
+//void event_CHECK_GOAL(oi_t *sensor_data);
 
 //Pointer variables from other programs
 // --------------------------
@@ -39,63 +39,56 @@ volatile int DONE = 0;
 volatile char s_data[21];
 volatile int i = 0;
 // -------------------------
-char songTone[16] = { };
+//char songTone[16] = { };
 
-void main(void)
+int main(void)
 {
     //Initialize the LCD. This also clears the screen
     lcd_init();
-    //Initialize the Servo
-    servo_init();
-    //Initialize the buttons with interrupts
-    button_init();
-    //Initialize the ADC
-    init_ADC();
-    //Initialize the Ping for getting distance
-    ping_init();
-    //Initialize UART for TCP communication
-    serial_init(&event , &s_data[0] , &i);
-
-    //oi_loadSong(1, 16, songTone, songDuration);
-
-    //Initialize sensor
+    //servo_init();
+    //button_init();
+    //init_ADC();
+    //ping_init();
+    //serial_init(&event , &s_data[0] , &i);
     oi_t *sensor_data = oi_alloc();
-    //oi_free(sensor_data);
     oi_init(sensor_data);
-    move_init(&event);
-    scan_init(&event);
+    //move_init(&event);
+    //scan_init(&event);
 
-    while (DONE == 0)
-    {
-        //Scanning
-        if (event == 0) { event_0(&sensor_data); }
-        //Bump right
-        if (event == 2) { event_2(&sensor_data); }
-        //Bump left
-        if (event == 3) { event_3(&sensor_data); }
-        //Right Border
-        if (event == 4) { event_4(&sensor_data); }
-        //Left Border
-        if (event == 5) { event_5(&sensor_data); }
-        //Right Cliff
-        if (event == 6) { event_6(&sensor_data); }
-        //Left Cliff
-        if (event == 7) { event_7(&sensor_data); }
-        //Obstructions in path
-        if (event == 8) { event_8(&sensor_data); }
-        //Found small object that is approximately 7.5cm
-        if (event == 9) { event_9(&sensor_data); }
-        //Check GOAL
-        if (event == 200) { event_CHECK_GOAL(&sensor_data); }
-    }
+    move_forward(sensor_data, 500);
+    //event_0(sensor_data);
+//    while (DONE == 0)
+//    {
+//        //Scanning
+//        if (event == 0) { event_0(sensor_data); }
+//        //Bump right
+//        if (event == 2) { event_2(sensor_data); }
+//        //Bump left
+//        if (event == 3) { event_3(sensor_data); }
+//        //Right Border
+//        if (event == 4) { event_4(sensor_data); }
+//        //Left Border
+//        if (event == 5) { event_5(sensor_data); }
+//        //Right Cliff
+//        if (event == 6) { event_6(sensor_data); }
+//        //Left Cliff
+//        if (event == 7) { event_7(sensor_data); }
+//        //Obstructions in path
+//        if (event == 8) { event_8(sensor_data); }
+//        //Found small object that is approximately 7.5cm
+//        if (event == 9) { event_9(sensor_data); }
+//        //Check GOAL
+//        if (event == 200) { event_CHECK_GOAL(sensor_data); }
+//    }
 
-    unsigned char V_songTone[16] = {70,76,69,60,78,72,69,60,71,70,76,57,72,78,72,69};
-    unsigned char V_songDuration[16] = { 16, 16, 16, 32, 16, 16, 16, 8, 8, 16, 16, 16, 32, 16, 16, 64};
-
-    oi_loadSong(1, 16, V_songTone, V_songDuration);
-    oi_play_song(1);
+//    unsigned char V_songTone[16] = {70,76,69,60,78,72,69,60,71,70,76,57,72,78,72,69};
+//    unsigned char V_songDuration[16] = { 16, 16, 16, 32, 16, 16, 16, 8, 8, 16, 16, 16, 32, 16, 16, 64};
+//
+//    oi_loadSong(1, 16, V_songTone, V_songDuration);
+//    oi_play_song(1);
 
     oi_free(sensor_data);
+    return 0;
 }
 
 /*
@@ -110,10 +103,11 @@ void event_0(oi_t *sensor_data) {
  * Bump Right
  */
 void event_1(oi_t *sensor_data) {
-    lcd_printf("right bump");
-    move_backward(sensor_data , 50);
-    turn_left(sensor_data , 16);
-    event = 0;
+//    lcd_printf("right bump");
+//    move_backward(sensor_data , 50);
+//    turn_left(sensor_data , 16);
+//    event = 0;
+    move_backward(sensor_data, 500);
 }
 
 /*
