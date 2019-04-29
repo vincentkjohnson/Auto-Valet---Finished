@@ -84,6 +84,8 @@ void main(void)
         if (event == 8) { event_8(sensor_data); }
         //Found small object that is approximately 7.5cm
         if (event == 9) { event_9(sensor_data); }
+        //Check GOAL
+        if (event == 200) { event_CHECK_GOAL(sensor_data); }
     }
 
     unsigned char V_songTone[16] = {70,76,69,60,78,72,69,60,71,70,76,57,72,78,72,69};
@@ -206,5 +208,33 @@ void event_9(oi_t *sensor_data) {
     }
 }
 
+void event_CHECK_GOAL(oi_t *sensor_data) {
+    lcd_printf("Checking Goal Posts");
+    int total_objects = 0;
+    int count = 1;
+    while (count <= 2) {
+        scan_area();
+        int small_objects = 0;
+        int j;
+        for (; j < num_objects; j++) {
+            if (objects[j][1] < 8) {
+                small_objects++;
+            }
+        }
+
+        if (small_objects > 1) {
+            total_objects += small_objects;
+        }
+        turn_left(sensor_data, 180);
+        count ++;
+    }
+
+    if (total_objects == 4) {
+        DONE = 1;
+        event = 0;
+    } else {
+        DONE = 0;
+    }
+}
 
 

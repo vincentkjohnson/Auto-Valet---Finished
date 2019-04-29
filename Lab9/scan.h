@@ -17,6 +17,7 @@
  */
 
 extern double objects[20][3];
+extern int num_objects;
 extern double angle_small;
 extern double distance_small;
 

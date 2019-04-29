@@ -17,6 +17,7 @@
 volatile int *events;
 double angle_small;
 double distance_small;
+int num_objects;
 
 double objects[20][3];
 
@@ -43,7 +44,7 @@ void scan_area() { //[Width][Angle]
     int end_angle;
     int detected = 0;
     double distance[180];
-    int num_objects = 0;
+    num_objects = 0;
 
     servo_move(0);
     timer_waitMillis(1000);
