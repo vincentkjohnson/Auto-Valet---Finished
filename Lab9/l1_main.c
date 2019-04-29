@@ -118,12 +118,10 @@ int main(void)
 
         if (event >= 200 && event <= 290) { event_200(&sensor_data); }
     }
-
-    unsigned char V_songTone[16] = {70,76,69,60,78,72,69,60,71,70,76,57,72,78,72,69};
-    unsigned char V_songDuration[16] = { 16, 16, 16, 32, 16, 16, 16, 8, 8, 16, 16, 16, 32, 16, 16, 64};
-
-    oi_loadSong(1, 16, V_songTone, V_songDuration);
-    oi_play_song(1);
+    unsigned char MarioD_songTone[11] = {71,77,77,77,77,76,74,72,76,76,72};
+    unsigned char MarioD_songDuration[11] = {15,15,15,15,20,20,20,15,15,15,20};
+    oi_loadSong(3, 11, MarioD_songTone,MarioD_songDuration);
+    oi_play_song(3);
 
     oi_free(sensor_data);
     return 0;
