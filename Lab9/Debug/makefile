@@ -10,6 +10,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./Lab9_goal_routine.obj" \
 "./adc.obj" \
 "./button.obj" \
 "./data.obj" \
@@ -134,42 +135,42 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-To\ Be\ Decided.out \
+Lab\ 9.out \
 
 EXE_OUTPUTS__QUOTED += \
-"To Be Decided.out" \
+"Lab 9.out" \
 
 BIN_OUTPUTS += \
-To\ Be\ Decided.hex \
+Lab\ 9.hex \
 
 BIN_OUTPUTS__QUOTED += \
-"To Be Decided.hex" \
+"Lab 9.hex" \
 
 
 # All Target
 all: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory -Onone "To Be Decided.out"
+	@$(MAKE) --no-print-directory -Onone "Lab 9.out"
 
 # Tool invocations
-To\ Be\ Decided.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
+Lab\ 9.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: ARM Linker'
-	"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"To Be Decided.map" --heap_size=4096 --stack_size=4096 -i"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/lib" -i"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="To Be Decided_linkInfo.xml" --rom_model -o "To Be Decided.out" $(ORDERED_OBJS)
+	"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"Lab 9.map" --heap_size=4096 --stack_size=4096 -i"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/lib" -i"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="Lab 9_linkInfo.xml" --rom_model -o "Lab 9.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
-To\ Be\ Decided.hex: $(EXE_OUTPUTS)
+Lab\ 9.hex: $(EXE_OUTPUTS)
 	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: ARM Hex Utility'
-	"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/bin/armhex"  -o "To Be Decided.hex" $(EXE_OUTPUTS__QUOTED)
+	"C:/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.2.LTS/bin/armhex"  -o "Lab 9.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "adc.obj" "button.obj" "data.obj" "l1_main.obj" "lcd.obj" "movement.obj" "open_interface.obj" "ping.obj" "scan.obj" "servo.obj" "timer.obj" "tm4c123gh6pm_startup_ccs.obj" "uart.obj" 
-	-$(RM) "adc.d" "button.d" "data.d" "l1_main.d" "lcd.d" "movement.d" "open_interface.d" "ping.d" "scan.d" "servo.d" "timer.d" "tm4c123gh6pm_startup_ccs.d" "uart.d" 
+	-$(RM) "Lab9_goal_routine.obj" "adc.obj" "button.obj" "data.obj" "l1_main.obj" "lcd.obj" "movement.obj" "open_interface.obj" "ping.obj" "scan.obj" "servo.obj" "timer.obj" "tm4c123gh6pm_startup_ccs.obj" "uart.obj" 
+	-$(RM) "Lab9_goal_routine.d" "adc.d" "button.d" "data.d" "l1_main.d" "lcd.d" "movement.d" "open_interface.d" "ping.d" "scan.d" "servo.d" "timer.d" "tm4c123gh6pm_startup_ccs.d" "uart.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

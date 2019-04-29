@@ -9,6 +9,12 @@
  *
  */
 
+
+
+
+
+
+
 /**
  * method scans a 180 degree arc in front of the robot,
  * and prints out any objects width and angle of location onto putty.
@@ -17,3 +23,5 @@
  */
 void scan_area();
 void scan_init(int *event1);
+void scan_quick();
+int scan_goal();

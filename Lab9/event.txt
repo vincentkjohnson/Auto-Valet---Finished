@@ -1,4 +1,4 @@
-0 = no event, operating as normal
+0 = no event, operating as normal, preforms a quick scan
 1 = bump right
 2 = bump left
 3 = right border
@@ -6,7 +6,18 @@
 5 = right cliff
 6 = left cliff
 7 = keep moving forward, no objects
-8 = object in the left side of the moving path, it cannot move directly forward
-9 = object in the right side of the moving path, it cannot move directly forward
-10 = 
-11 = 
+8 = tall object in the left side of the moving path, it cannot move directly forward
+9 = tall object in the right side of the moving path, it cannot move directly forward
+10 = do a full scan
+11 = do a goal scan
+12 = small object from 0-22.5 and outside of 20cm
+13 = small object from 22.5-45 and outside of 20cm
+14 = small object from 45-67.5 and outside of 20cm
+15 = small object from 67.5-90 and outside of 20cm
+16 = small object from 90-112.5 and outside of 20cm
+17 = small object from 112.5-135 and outside of 20cm
+18 = small object from 135-157.5 and outside of 20cm
+19 = small object from 157.5-180 and outside of 20cm
+
+100 - 190 turn right 1xx degrees
+200 - 290 turn left 2xx degrees

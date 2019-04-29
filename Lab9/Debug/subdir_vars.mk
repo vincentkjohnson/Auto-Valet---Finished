@@ -12,6 +12,7 @@ LIB_SRCS += \
 ../lab5_scan_data.lib 
 
 C_SRCS += \
+../Lab9_goal_routine.c \
 ../adc.c \
 ../button.c \
 ../data.c \
@@ -27,6 +28,7 @@ C_SRCS += \
 ../uart.c 
 
 C_DEPS += \
+./Lab9_goal_routine.d \
 ./adc.d \
 ./button.d \
 ./data.d \
@@ -42,6 +44,7 @@ C_DEPS += \
 ./uart.d 
 
 OBJS += \
+./Lab9_goal_routine.obj \
 ./adc.obj \
 ./button.obj \
 ./data.obj \
@@ -57,6 +60,7 @@ OBJS += \
 ./uart.obj 
 
 OBJS__QUOTED += \
+"Lab9_goal_routine.obj" \
 "adc.obj" \
 "button.obj" \
 "data.obj" \
@@ -72,6 +76,7 @@ OBJS__QUOTED += \
 "uart.obj" 
 
 C_DEPS__QUOTED += \
+"Lab9_goal_routine.d" \
 "adc.d" \
 "button.d" \
 "data.d" \
@@ -87,6 +92,7 @@ C_DEPS__QUOTED += \
 "uart.d" 
 
 C_SRCS__QUOTED += \
+"../Lab9_goal_routine.c" \
 "../adc.c" \
 "../button.c" \
 "../data.c" \
