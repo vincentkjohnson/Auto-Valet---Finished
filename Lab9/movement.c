@@ -30,44 +30,53 @@ void move_forward(oi_t *sensor_data, int millimeters) {
         int l = sensor_data -> cliffLeftSignal;
         int r = sensor_data -> cliffRightSignal;
 
-        if (sensor_data -> bumpRight == 1)
-        {
+        //Hit something on the right
+        if (sensor_data -> bumpRight == 1) {
             *events = 1;
             break;
         }
-        if (sensor_data -> bumpLeft == 1)
-        {
+
+        //Hit something on the left
+        if (sensor_data -> bumpLeft == 1) {
             *events = 2;
             break;
         }
-        if (fr >= 2700 || r >= 2700)
-        {
+
+        //Right Border
+        if (fr >= 2700 || r >= 2700) {
             *events = 3;
             break;
         }
-        if (fl >= 2700 || l >= 2700)
-        {
+
+        //Left Border
+        if (fl >= 2700 || l >= 2700) {
             *events = 4;
             break;
         }
-        if (fr <= 900 || r <= 900)
-        {
+
+        //Right Cliff
+        if (fr <= 900 || r <= 900) {
             *events = 5;
             break;
         }
-        if (fl <= 900 || l <= 900)
-        {
+
+        //Left Cliff
+        if (fl <= 900 || l <= 900) {
             *events = 6;
             break;
         }
-
-        //lcd_printf("Distance: %d", sum);
     }
 
     oi_setWheels(0,0);
 }
 
 int move_backward(oi_t *sensor_data, int millimeters) {
+
+    unsigned char Back_songTone[16] = {96,96,96,96,96,96,96,96,96};
+    unsigned char Back_songDuration[16] = {16,16,16,16,16,16,16,16,16};
+    oi_loadSong(2, 16, Back_songTone, Back_songDuration);
+    oi_play_song(2);
+
     int sum = 0;
 
     //Right | Left 270, 258
@@ -75,8 +84,6 @@ int move_backward(oi_t *sensor_data, int millimeters) {
     while (abs(sum) < millimeters) {
         oi_update(sensor_data);
         sum += sensor_data -> distance;
-
-        //lcd_printf("Distance: %d", sum);
     }
 
     oi_setWheels(0,0);
@@ -89,7 +96,6 @@ void turn_right(oi_t *sensor_data, double degrees) {
     while (abs(sum) < degrees) {
         oi_update(sensor_data);
         sum += sensor_data -> angle;
-        //lcd_printf("Angle: %f", sum);
     }
     oi_setWheels(0,0);
 }
@@ -100,48 +106,7 @@ void turn_left(oi_t *sensor_data, double degrees) {
     while (abs(sum) < degrees) {
         oi_update(sensor_data);
         sum += sensor_data -> angle;
-       // lcd_printf("Angle: %f", sum);
     }
     oi_setWheels(0,0);
 }
-
-//void moving_in_square(oi_t *sensor_data) {
-//    int loops = 0;
-//    while (loops < 4) {
-//        move_foward(sensor_data, 500);
-//        turn_right(sensor_data , 90.0);
-//        loops++;
-//    }
-//}
-
-//void collision_detection(oi_t *sensor_data) {
-//    int sum = 0;
-//    while (sum < 2000) {
-//        oi_update(sensor_data);
-//        if (sensor_data -> bumpLeft == 1) {
-//            oi_setWheels(0, 0);
-//            sum -= move_backward(sensor_data, 150);
-//            //sum += sensor_data -> distance;
-//            turn_right(sensor_data, 90.0);
-//            move_foward(sensor_data, 250);
-//            turn_left(sensor_data, 90.0);
-////            sum -= 150;
-//        }
-//        if (sensor_data -> bumpRight == 1) {
-//            oi_setWheels(0, 0);
-//            sum -= move_backward(sensor_data, 150);
-//            //sum += sensor_data -> distance;
-//            turn_left(sensor_data, 90.0);
-//            move_foward(sensor_data, 250);
-//            turn_right(sensor_data, 90.0);
-////            sum -= 150;
-//        }
-//        oi_setWheels(125,125);
-//        sum += sensor_data -> distance;
-//        lcd_printf("Distance: %d", sum);
-//    }
-//    oi_setWheels(0,0);
-//}
-
-
 
