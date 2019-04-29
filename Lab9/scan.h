@@ -15,5 +15,11 @@
  *
  * Then finds the smallest object and prints the  angle and width to LCD.
  */
-void scan_area(int speed);
+
+extern double objects[20][3];
+extern int num_objects;
+extern double angle_small;
+extern double distance_small;
+
+void scan_area();
 void scan_init(int *event1);
