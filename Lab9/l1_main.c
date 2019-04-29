@@ -30,6 +30,7 @@ void event_6(oi_t *sensor_data);
 void event_7(oi_t *sensor_data);
 void event_8(oi_t *sensor_data);
 void event_9(oi_t *sensor_data);
+void event_CHECK_GOAL(oi_t *sensor_data);
 
 //Pointer variables from other programs
 // --------------------------
@@ -215,7 +216,7 @@ void event_CHECK_GOAL(oi_t *sensor_data) {
     while (count <= 2) {
         scan_area();
         int small_objects = 0;
-        int j;
+        int j = 0;
         for (; j < num_objects; j++) {
             if (objects[j][1] < 8) {
                 small_objects++;
