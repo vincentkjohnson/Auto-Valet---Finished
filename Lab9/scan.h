@@ -17,9 +17,8 @@
  */
 
 extern double objects[20][3];
-extern int num_objects;
-extern double angle_small;
-extern double distance_small;
 
 void scan_area();
 void scan_init(int *event1);
+void scan_quick();
+int scan_goal();

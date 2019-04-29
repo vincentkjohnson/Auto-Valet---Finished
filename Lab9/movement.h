@@ -15,6 +15,7 @@ void turn_right(oi_t *sensor_data, double degrees);
 void turn_left(oi_t *sensor_data, double degrees);
 void moving_in_square(oi_t *sensor_data);
 void collision_detection(oi_t *sensor_data);
+void plow_forward(oi_t *sensor_data, int millimeters);
 
 
 

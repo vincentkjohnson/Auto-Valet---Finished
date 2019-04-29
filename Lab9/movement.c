@@ -70,6 +70,27 @@ void move_forward(oi_t *sensor_data, int millimeters) {
     oi_setWheels(0,0);
 }
 
+void plow_forward(oi_t *sensor_data, int millimeters)
+{
+    int sum = 0;
+
+    //Right | Left 270, 258
+    oi_setWheels(100,100);
+    while (sum < millimeters) {
+        oi_update(sensor_data);
+        sum += sensor_data -> distance;
+        if (sensor_data -> bumpRight == 1)
+        {
+            *events = 1;
+        }
+        if (sensor_data -> bumpLeft == 1)
+        {
+            *events = 2;
+        }
+    }
+    oi_setWheels(0,0);
+}
+
 int move_backward(oi_t *sensor_data, int millimeters) {
 
     unsigned char Back_songTone[16] = {96,96,96,96,96,96,96,96,96};
