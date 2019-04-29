@@ -68,25 +68,25 @@ void main(void)
     while (DONE == 0)
     {
         //Scanning
-        if (event == 0) { event_0(sensor_data); }
+        if (event == 0) { event_0(&sensor_data); }
         //Bump right
-        if (event == 2) { event_2(sensor_data); }
+        if (event == 2) { event_2(&sensor_data); }
         //Bump left
-        if (event == 3) { event_3(sensor_data); }
+        if (event == 3) { event_3(&sensor_data); }
         //Right Border
-        if (event == 4) { event_4(sensor_data); }
+        if (event == 4) { event_4(&sensor_data); }
         //Left Border
-        if (event == 5) { event_5(sensor_data); }
+        if (event == 5) { event_5(&sensor_data); }
         //Right Cliff
-        if (event == 6) { event_6(sensor_data); }
+        if (event == 6) { event_6(&sensor_data); }
         //Left Cliff
-        if (event == 7) { event_7(sensor_data); }
+        if (event == 7) { event_7(&sensor_data); }
         //Obstructions in path
-        if (event == 8) { event_8(sensor_data); }
+        if (event == 8) { event_8(&sensor_data); }
         //Found small object that is approximately 7.5cm
-        if (event == 9) { event_9(sensor_data); }
+        if (event == 9) { event_9(&sensor_data); }
         //Check GOAL
-        if (event == 200) { event_CHECK_GOAL(sensor_data); }
+        if (event == 200) { event_CHECK_GOAL(&sensor_data); }
     }
 
     unsigned char V_songTone[16] = {70,76,69,60,78,72,69,60,71,70,76,57,72,78,72,69};
