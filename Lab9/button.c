@@ -158,30 +158,30 @@ uint8_t button_getButton() {
         x = 1;
     }
     // if button 2 is pushed
-    if ((GPIO_PORTE_DATA_R | 0b11111101) == 0b11111101)
-    {
-        x = 2;
-    }
-    // if button 3 is pushed
-    if ((GPIO_PORTE_DATA_R | 0b11111011) == 0b11111011)
-    {
-        x = 3;
-    }
-    // if button 4 is pushed
-    if ((GPIO_PORTE_DATA_R | 0b11110111) == 0b11110111)
-    {
-        x = 4;
-    }
-    // if button 5 is pushed
-    if ((GPIO_PORTE_DATA_R | 0b11101111) == 0b11101111)
-    {
-        x = 5;
-    }
-    // if button 6 is pushed
-    if ((GPIO_PORTE_DATA_R | 0b11011111) == 0b11011111)
-    {
-        x = 6;
-    }
+//    if ((GPIO_PORTE_DATA_R | 0b11111101) == 0b11111101)
+//    {
+//        x = 2;
+//    }
+//    // if button 3 is pushed
+//    if ((GPIO_PORTE_DATA_R | 0b11111011) == 0b11111011)
+//    {
+//        x = 3;
+//    }
+//    // if button 4 is pushed
+//    if ((GPIO_PORTE_DATA_R | 0b11110111) == 0b11110111)
+//    {
+//        x = 4;
+//    }
+//    // if button 5 is pushed
+//    if ((GPIO_PORTE_DATA_R | 0b11101111) == 0b11101111)
+//    {
+//        x = 5;
+//    }
+//    // if button 6 is pushed
+//    if ((GPIO_PORTE_DATA_R | 0b11011111) == 0b11011111)
+//    {
+//        x = 6;
+//    }
     return x;
 }
 
