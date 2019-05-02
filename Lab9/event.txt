@@ -18,6 +18,9 @@
 17 = small object from 112.5-135 and outside of 20cm
 18 = small object from 135-157.5 and outside of 20cm
 19 = small object from 157.5-180 and outside of 20cm
-
+.
+.
+.
 100 - 190 turn right 1xx degrees, goes in between the goal posts
 200 - 290 turn left 2xx degrees, goes in between the goal posts
+300 - 480 single small object found 300 + x degrees

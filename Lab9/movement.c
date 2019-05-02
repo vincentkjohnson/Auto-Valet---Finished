@@ -79,6 +79,10 @@ void plow_forward(oi_t *sensor_data, int millimeters)
     while (sum < millimeters) {
         oi_update(sensor_data);
         sum += sensor_data -> distance;
+        int fl = sensor_data -> cliffFrontLeftSignal;
+        int fr = sensor_data -> cliffFrontRightSignal;
+        int l = sensor_data -> cliffLeftSignal;
+        int r = sensor_data -> cliffRightSignal;
         if (sensor_data -> bumpRight == 1)
         {
             *events = 1;
@@ -86,6 +90,28 @@ void plow_forward(oi_t *sensor_data, int millimeters)
         if (sensor_data -> bumpLeft == 1)
         {
             *events = 2;
+        }
+        //Right Cliff
+        if (fr <= 900 || r <= 900) {
+            *events = 1;
+            break;
+        }
+
+        //Left Cliff
+        if (fl <= 900 || l <= 900) {
+            *events = 2;
+            break;
+        }
+        //Right Border
+        if (fr >= 2700 || r >= 2700) {
+            *events = 1;
+            break;
+        }
+
+        //Left Border
+        if (fl >= 2700 || l >= 2700) {
+            *events = 2;
+            break;
         }
     }
     oi_setWheels(0,0);

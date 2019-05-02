@@ -105,7 +105,7 @@ float ping_getDistance() {
     ping_read();
     while(edge != 2);
     pulseLength = fallingEdge - risingEdge;
-    if (pulseLength > 0) {
+    if (pulseLength >= 0) {
         return pulseLength;
     }
     else {

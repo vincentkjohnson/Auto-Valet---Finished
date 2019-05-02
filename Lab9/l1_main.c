@@ -18,34 +18,10 @@
  * @date 04-1-19
  */
 
-//Main Functions to be used:
-void event_0(void);
-void event_1(oi_t **sensor_data);
-void event_2(oi_t **sensor_data);
-void event_3(oi_t **sensor_data);
-void event_4(oi_t **sensor_data);
-void event_5(oi_t **sensor_data);
-void event_6(oi_t **sensor_data);
-void event_7(oi_t **sensor_data);
-void event_8(oi_t **sensor_data);
-void event_9(oi_t **sensor_data);
-void event_10(void);
-void event_11(oi_t **sensor_data);
-void event_12(oi_t **sensor_data);
-void event_13(oi_t **sensor_data);
-void event_14(oi_t **sensor_data);
-void event_15(oi_t **sensor_data);
-void event_16(oi_t **sensor_data);
-void event_17(oi_t **sensor_data);
-void event_18(oi_t **sensor_data);
-void event_19(oi_t **sensor_data);
-void event_100(oi_t **sensor_data);
-void event_200(oi_t **sensor_data);
-void event_CHECK_GOAL(oi_t **sensor_data);
-
 //Pointer variables from other programs
 // --------------------------
 volatile int event = 0;
+volatile int s_event = 0;
 volatile char s_data[21];
 volatile int i = 0;
 int DONE = 0;
@@ -60,7 +36,7 @@ int main(void)
     button_init();
     init_ADC();
     ping_init();
-    serial_init(&event , &s_data[0] , &i);
+    serial_init(&s_event , &s_data[0] , &i);
     oi_t *sensor_data = oi_alloc();
     oi_init(sensor_data);
     move_init(&event);
@@ -68,71 +44,19 @@ int main(void)
 //    oi_free(sensor_data);
 
     int start = 0;
-    oi_update(sensor_data);
-    double charge = (sensor_data -> batteryCharge) / (sensor_data -> batteryCapacity);
-    lcd_printf("%lf" , charge);
+//    oi_update(sensor_data);
+//    double charge = (sensor_data -> batteryCharge) / (sensor_data -> batteryCapacity);
+//    lcd_printf("%lf" , charge);
+//    char startArray[1];
     while (start == 0) {
-        //logic to receive from app
-//        for (i = 0; i < 20; i++) {
-//            s_data[i] = UART1_Receive();
-//            if (s_data[i] == '#') {
-//                int j;
-//                for (j = i; j < 20; j++) {
-//                    s_data[j] = 0x20;
-//                }
-//                break;
-//            }
-//            lcd_printf("%d %c" , i + 1 , s_data[i]);
+//        startArray[0] = UART1_Receive();
+//        if (startArray[0] == "#") {
+//            start = 1;
 //        }
-//        lcd_printf("%s", s_data);
         start = button_getButton();
     }
 
     while (DONE == 0) {
-//        //Scanning
-//        if (event == 0) { event_0(); }
-//        //Bump right
-//        if (event == 1) { event_1(&sensor_data); }
-////        //Bump left
-//        if (event == 2) { event_2(&sensor_data); }
-////        //Right Border
-//        if (event == 3) { event_3(&sensor_data); }
-////        //Left Border
-//        if (event == 4) { event_4(&sensor_data); }
-////        //Right Cliff
-//        if (event == 5) { event_5(&sensor_data); }
-////        //Left Cliff
-//        if (event == 6) { event_6(&sensor_data); }
-////        //Path is clear, keep moving forward
-//        if (event == 7) { event_7(&sensor_data); }
-////        //Obstructions in path
-//        if (event == 8) { event_8(&sensor_data); }
-////        //Found small object that is approximately 7.5cm
-//        if (event == 9) { event_9(&sensor_data); }
-//
-//        if (event == 10) { event_10(); }
-//
-//        if (event == 11) { event_11(&sensor_data); }
-//
-//        if (event == 12) { event_12(&sensor_data); }
-//
-//        if (event == 13) { event_13(&sensor_data); }
-//
-//        if (event == 14) { event_14(&sensor_data); }
-//
-//        if (event == 15) { event_15(&sensor_data); }
-//
-//        if (event == 16) { event_16(&sensor_data); }
-//
-//        if (event == 17) { event_17(&sensor_data); }
-//
-//        if (event == 18) { event_18(&sensor_data); }
-//
-//        if (event == 19) { event_19(&sensor_data); }
-////        //Check GOAL
-//        if (event >= 100 && event <= 190) { event_100(&sensor_data); }
-//
-//        if (event >= 200 && event <= 290) { event_200(&sensor_data); }
 
         //quick scan
         if (event == 0)
@@ -199,7 +123,7 @@ int main(void)
         {
             lcd_printf("all clear");
             event = 0;
-            move_forward(sensor_data , 200);
+            move_forward(sensor_data , 150);
         }
         //obstructions in the path on the left side, turn right and scan again
         if (event == 8)
@@ -218,6 +142,7 @@ int main(void)
         if (event == 10)
         {
             lcd_printf("full scan");
+            event = 0;
             scan_area();
         }
         if (event == 11)
@@ -225,13 +150,9 @@ int main(void)
             lcd_printf("goal scan");
             int i = 0;
             i += scan_goal();
-            turn_right(sensor_data , 90);
+            turn_right(sensor_data , 180);
             i += scan_goal();
-            turn_right(sensor_data , 90);
-            i += scan_goal();
-            turn_right(sensor_data , 90);
-            i += scan_goal();
-            turn_right(sensor_data , 90);
+            turn_right(sensor_data , 180);
             if (i >= 3)
             {
                 lcd_printf("Objective Complete");
@@ -245,7 +166,7 @@ int main(void)
         //small object from 0-22.5 and outside of 20cm
         if (event == 12)
         {
-            lcd_printf("1 small object");
+            lcd_printf("1 small, move closer");
             turn_right(sensor_data , 78);
             event = 10;
             move_forward(sensor_data , 100);
@@ -253,7 +174,7 @@ int main(void)
         //small object from 22.5-45 and outside of 20cm
         if (event == 13)
         {
-            lcd_printf("1 small object");
+            lcd_printf("1 small, move closer");
             turn_right(sensor_data , 56);
             event = 10;
             move_forward(sensor_data , 100);
@@ -261,7 +182,7 @@ int main(void)
         //small object from 45-67.5 and outside of 20cm
         if (event == 14)
         {
-            lcd_printf("1 small object");
+            lcd_printf("1 small, move closer");
             turn_left(sensor_data , 34);
             event = 10;
             move_forward(sensor_data , 100);
@@ -269,7 +190,7 @@ int main(void)
         //small object from 67.5-90 and outside of 20cm
         if (event == 15)
         {
-            lcd_printf("1 small object");
+            lcd_printf("1 small, move closer");
             turn_left(sensor_data , 11);
             event = 10;
             move_forward(sensor_data , 100);
@@ -277,7 +198,7 @@ int main(void)
         //small object from 90-112.5 and outside of 20cm
         if (event == 16)
         {
-            lcd_printf("1 small object");
+            lcd_printf("1 small, move closer");
             turn_left(sensor_data , 11);
             event = 10;
             move_forward(sensor_data , 100);
@@ -285,7 +206,7 @@ int main(void)
         //small object from 112.5-135 and outside of 20cm
         if (event == 17)
         {
-            lcd_printf("1 small object");
+            lcd_printf("1 small, move closer");
             turn_left(sensor_data , 34);
             event = 10;
             move_forward(sensor_data , 100);
@@ -293,7 +214,7 @@ int main(void)
         //small object from 135-157.5 and outside of 20cm
         if (event == 18)
         {
-            lcd_printf("1 small object");
+            lcd_printf("1 small, move closer");
             turn_left(sensor_data , 56);
             event = 10;
             move_forward(sensor_data , 100);
@@ -301,7 +222,7 @@ int main(void)
         //small object from 157.5-180 and outside of 20cm
         if (event == 19)
         {
-            lcd_printf("1 small object");
+            lcd_printf("1 small, move closer");
             turn_left(sensor_data , 78);
             event = 10;
             move_forward(sensor_data , 100);
@@ -309,25 +230,95 @@ int main(void)
         //100 - 190 turn right 1xx degrees and go between pylons
         if (event >= 100 && event <= 190)
         {
-            event -= 100;
-            turn_right(sensor_data , event);
-            event = 11;
-            plow_forward(sensor_data , 400);
-            if (event == 1 || event == 2)
-            {
-                break;
+            //event -= 100;
+            lcd_printf("2 small, turn right");
+            double distance_one = objects[1][2];
+            double distance_two = objects[2][2];
+            double angle_one = objects[1][0];
+            double angle_two = objects[2][0];
+
+            if (abs(distance_one - distance_two) <= 10) {
+//                turn_right(sensor_data, (angle_one + angle_two) / 2);
+                event = 11;
+                plow_forward(sensor_data , 400);
+                if (event == 1 || event == 2) {
+                    break;
+                }
+            } else if (distance_one < distance_two) {
+                turn_right(sensor_data , angle_two);
+                move_forward(sensor_data, (distance_two / 2));
+                event = 10;
+            } else if (distance_two < distance_one) {
+                turn_right(sensor_data , angle_one);
+                move_forward(sensor_data, (distance_one / 2));
+                event = 10;
             }
         }
-        //200 - 290 turn right 1xx degrees and go between pylons
+        //200 - 290 turn right 1xx degrees and go between pillars
         if (event >= 200 && event <= 290)
         {
-            event -= 200;
-            turn_left(sensor_data , event);
-            event = 11;
-            plow_forward(sensor_data , 400);
-            if (event == 1 || event == 2)
+            //event -= 100;
+            lcd_printf("2 small, turn left");
+            double distance_one = objects[1][2];
+            double distance_two = objects[2][2];
+            double angle_one = objects[1][0];
+            double angle_two = objects[2][0];
+
+            if (abs(distance_one - distance_two) <= 10) {
+//                turn_left(sensor_data, (angle_one + angle_two) / 2);
+                event = 11;
+                plow_forward(sensor_data , 400);
+                if (event == 1 || event == 2) {
+                    break;
+                }
+            } else if (distance_one < distance_two) {
+                turn_left(sensor_data , angle_two);
+                move_forward(sensor_data, (distance_two / 2));
+                event = 10;
+            } else if (distance_two < distance_one) {
+                turn_left(sensor_data , angle_one);
+                move_forward(sensor_data, (distance_one / 2));
+                event = 10;
+            }
+        }
+        //300 - 480 single small object found 300 + x degrees
+        if (event >= 300 && event <= 480)
+        {
+            lcd_printf("scan for small");
+            //let event = the degree at which the small object was seen
+            event -= 300;
+            //turn so the object is at 150 degrees
+            if (event < 150)
             {
-                break;
+                turn_right(sensor_data , 130 - event);
+            }
+            else
+            {
+                turn_left(sensor_data , event - 130);
+            }
+            //check to see if it can see two small objects
+            int pillars = scan_goal();
+            //if it sees two pillars
+            if (pillars >= 2)
+            {
+                event = 10;
+            }
+            else
+            {
+                //if it sees less than two pillars, turn left and check the other side
+                //turn so the object is at 30 degrees
+                turn_left(sensor_data , 120);
+                //check to see if it can see two small objects
+                pillars = scan_goal();
+                //if it sees two pillars
+                if (pillars >= 2)
+                {
+                    event = 10;
+                }
+                //if it sees less than two pillars
+                event = 10;
+                turn_right(sensor_data , 5);
+                move_forward(sensor_data , 100);
             }
         }
     }
@@ -340,206 +331,3 @@ int main(void)
     return 0;
 }
 
-/*
- * Scan
- */
-void event_0(void) {
-    lcd_printf("scanning");
-    scan_quick();
-}
-
-/*
- * Bump Right
- */
-void event_1(oi_t **sensor_data) {
-    lcd_printf("right bump");
-    move_backward(*sensor_data , 50);
-    turn_left(*sensor_data , 47);
-    event = 0;
-}
-
-/*
- * Bump Left
- */
-void event_2(oi_t **sensor_data) {
-    lcd_printf("left bump");
-    move_backward(*sensor_data , 50);
-    turn_right(*sensor_data , 43);
-    event = 0;
-}
-
-/*
- * Right Border
- */
-void event_3(oi_t **sensor_data) {
-    lcd_printf("right border");
-    move_backward(*sensor_data , 50);
-    turn_left(*sensor_data , 17);
-    event = 0;
-}
-
-/*
- * Left Border
- */
-void event_4(oi_t **sensor_data) {
-    lcd_printf("left border");
-    move_backward(*sensor_data , 50);
-    turn_right(*sensor_data , 123);
-    event = 0;
-}
-
-/*
- * Right Cliff
- */
-void event_5(oi_t **sensor_data) {
-    lcd_printf("right cliff");
-    move_backward(*sensor_data , 50);
-    turn_left(*sensor_data , 15);
-    event = 0;
-}
-
-/*
- * Left Cliff
- */
-void event_6(oi_t **sensor_data) {
-    lcd_printf("left cliff");
-    move_backward(*sensor_data , 50);
-    turn_right(*sensor_data , 15);
-    event = 0;
-}
-
-/*
- * Path is clear,
- * Keep moving
- */
-void event_7(oi_t **sensor_data) {
-    lcd_printf("all clear");
-    move_forward(*sensor_data , 200);
-    event = 0;
-}
-
-/*
- * Obstructions in path,
- * Turn and scan again
- */
-void event_8(oi_t **sensor_data) {
-    lcd_printf("not clear");
-    event = 0;
-    turn_right(*sensor_data , 30);
-}
-
-/*
- * Detected
- */
-void event_9(oi_t **sensor_data) {
-    lcd_printf("not clear");
-    event = 0;
-    turn_left(*sensor_data , 30);
-}
-
-void event_10(void) {
-    lcd_printf("full scan");
-    scan_area();
-}
-
-void event_11(oi_t **sensor_data) {
-    lcd_printf("goal scan");
-    int i = 0;
-    i += scan_goal();
-    turn_right(*sensor_data , 90);
-    i += scan_goal();
-    turn_right(*sensor_data , 90);
-    i += scan_goal();
-    turn_right(*sensor_data , 90);
-    i += scan_goal();
-    turn_right(*sensor_data , 90);
-    if (i >= 3)
-    {
-        lcd_printf("Objective Complete");
-        DONE = 1;
-    }
-    else
-    {
-        event == 0;
-    }
-}
-
-void event_12(oi_t **sensor_data) {
-    lcd_printf("1 small object");
-    turn_right(*sensor_data , 78);
-    event = 10;
-    move_forward(*sensor_data , 100);
-
-}
-
-void event_13(oi_t **sensor_data) {
-    lcd_printf("1 small object");
-    turn_right(*sensor_data , 56);
-    event = 10;
-    move_forward(*sensor_data , 100);
-}
-
-void event_14(oi_t **sensor_data) {
-    lcd_printf("1 small object");
-    turn_left(*sensor_data , 34);
-    event = 10;
-    move_forward(*sensor_data , 100);
-
-}
-
-void event_15(oi_t **sensor_data) {
-    lcd_printf("1 small object");
-    turn_left(*sensor_data , 11);
-    event = 10;
-    move_forward(*sensor_data , 100);
-}
-
-void event_16(oi_t **sensor_data) {
-    lcd_printf("1 small object");
-    turn_left(*sensor_data , 11);
-    event = 10;
-    move_forward(*sensor_data , 100);
-}
-
-void event_17(oi_t **sensor_data) {
-    lcd_printf("1 small object");
-    turn_left(*sensor_data , 34);
-    event = 10;
-    move_forward(*sensor_data , 100);
-}
-
-void event_18(oi_t **sensor_data) {
-    lcd_printf("1 small object");
-    turn_left(*sensor_data , 56);
-    event = 10;
-    move_forward(*sensor_data , 100);
-}
-
-void event_19(oi_t **sensor_data) {
-    lcd_printf("1 small object");
-    turn_left(*sensor_data , 78);
-    event = 10;
-    move_forward(*sensor_data , 100);
-}
-
-void event_100(oi_t **sensor_data) {
-    event -= 100;
-    turn_right(*sensor_data , event);
-    event = 11;
-    plow_forward(*sensor_data , 400);
-    if (event == 1 || event == 2)
-    {
-        DONE = 1;
-    }
-}
-
-void event_200(oi_t **sensor_data) {
-    event -= 200;
-    turn_left(*sensor_data , event);
-    event = 11;
-    plow_forward(*sensor_data , 400);
-    if (event == 1 || event == 2)
-    {
-        DONE = 1;
-    }
-}

@@ -17,6 +17,7 @@
  */
 
 extern double objects[20][3];
+extern int num_objects;
 
 void scan_area();
 void scan_init(int *event1);

@@ -98,5 +98,5 @@ int adc_read() {
 }
 
 double adc_conversion(int voltage, double calibration) {
-    return 69391*(pow(voltage , -1.113)) - calibration;
+    return 50000*(pow(voltage , -1.113)) - calibration;
 }
