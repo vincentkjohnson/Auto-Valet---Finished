@@ -97,18 +97,11 @@ void ping_read(void) {
 	TIMER3_CTL_R |= 0x100; //Enable Timer3 to start counting
 }
 
-/**
- * Calculates the ping width
- */
 float ping_getDistance() {
-    ping_send();
-    ping_read();
-    while(edge != 2);
-    pulseLength = fallingEdge - risingEdge;
-    if (pulseLength > 0) {
-        return pulseLength;
-    }
-    else {
-        return 0xFFFF - risingEdge + fallingEdge;
-    }
+	ping_send();
+	ping_read();
+	while(edge != 2);
+	
+	pulseLength = fallingEdge - risingEdge;
+	return pulseLength; // 923.4f;
 }
